@@ -7,6 +7,13 @@ else
     let s:islinux = 1
 endif
 
+" 判断是终端还是 Gvim 
+if has("gui_running")
+    let g:isGUI = 1
+else
+    let g:isGUI = 0
+endif
+
 
 
 
