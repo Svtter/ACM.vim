@@ -16,7 +16,7 @@ ACM.vim
 
 本插件支持vundle进行安装，安装vundle请参见: https://github.com/gmarik/Vundle.vim
 
-安装方法是，将'Svtter/ACM.vim'添加到你的vimrc, 然后`:PluginInstall`
+安装方法是，将`Bundle 'Svtter/ACM.vim'`添加到你的vimrc, 然后`:PluginInstall`
 
 注意
 ---
