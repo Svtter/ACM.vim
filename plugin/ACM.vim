@@ -9,9 +9,9 @@ endif
 
 " 判断是终端还是 Gvim 
 if has("gui_running")
-    let g:isGUI = 1
+    let s:isGUI = 1
 else
-    let g:isGUI = 0
+    let s:isGUI = 0
 endif
 
 
