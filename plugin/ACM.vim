@@ -38,10 +38,6 @@ inoremap <c-F10> <ESC>:call Link()<CR>
 noremap <F8> :call Debug()<CR>
 inoremap <F8> <ESC>:call Debug()<CR>
 
-" <F5> 运行python
-noremap <F5> :call RunPy()<CR>
-inoremap <F5> <ESC>:call RunPy()<CR>
-
 let s:LastShellReturn_C = 0
 let s:LastShellReturn_L = 0
 let s:ShowWarning = 1
