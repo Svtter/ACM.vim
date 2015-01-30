@@ -172,6 +172,8 @@ func! Link()
 endfunc
 
 func! Run()
+    " confirm directory
+    let s:pwd = expand("%:p:h")
     let s:ShowWarning = 0
     call Link()
     let s:ShowWarning = 1
@@ -193,7 +195,8 @@ func! Run()
                 exe ":!%<.exe"
             else
                 if s:isGUI
-                    exe ":!gnome-terminal -x bash -c 'time ./%<; echo; echo 请按 Enter 键继续; read'"
+                    exe ":!gnome-terminal -x bash -c ' cd " . s:pwd . ";time ./%<; echo; echo 请按 Enter 键继续; read'"
+                    echo ":!gnome-terminal -x bash -c ' cd " . s:pwd . ";time ./%<; echo; echo 请按 Enter 键继续; read'"
                 else
                     exe ":!clear; ./%<"
                 endif
