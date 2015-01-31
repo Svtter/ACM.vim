@@ -196,7 +196,6 @@ func! Run()
             else
                 if s:isGUI
                     exe ":!gnome-terminal -x bash -c ' cd " . s:pwd . ";time ./%<; echo; echo 请按 Enter 键继续; read'"
-                    echo ":!gnome-terminal -x bash -c ' cd " . s:pwd . ";time ./%<; echo; echo 请按 Enter 键继续; read'"
                 else
                     exe ":!clear; ./%<"
                 endif
@@ -208,7 +207,36 @@ func! Run()
 endfunc
 
 func! Debug()
-    exec 'w'
-    exec '!g++ % -g -O2 -o %<'
-    exec '!gdb ./%<'
+    " confirm directory
+    let s:pwd = expand("%:p:h")
+    let s:ShowWarning = 0
+    call Link()
+    let s:ShowWarning = 1
+    if s:Sou_Error || s:LastShellReturn_C != 0 || s:LastShellReturn_L != 0
+        return
+    endif
+    let Sou = expand("%:p")
+    if expand("%:e") == "c" || expand("%:e") == "cpp" || expand("%:e") == "cxx"
+        let Obj = expand("%:p:r").s:Obj_Extension
+        if s:iswindows
+            let Exe = expand("%:p:r").s:Exe_Extension
+        else
+            let Exe = expand("%:p:r")
+        endif
+        if executable(Exe) && getftime(Exe) >= getftime(Obj) && getftime(Obj) >= getftime(Sou)
+            redraw!
+            echohl WarningMsg | echo " running..."
+            if s:iswindows
+                exe ":!gdb %<.exe"
+            else
+                if s:isGUI
+                    exe ":!gnome-terminal -x bash -c ' cd " . s:pwd . ";gdb ./%<; echo; echo 请按 Enter 键继续; read'"
+                else
+                    exe ":!clear; ./%<"
+                endif
+            endif
+            redraw!
+            echohl WarningMsg | echo " running finish"
+        endif
+    endif
 endfunc
