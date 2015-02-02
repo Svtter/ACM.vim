@@ -258,4 +258,5 @@ function! Tidy()
     let s:linenum = line(".")
     execute ":normal gg=G"
     execute ":".s:linenum
+    execute ":normal zz"
 endfunction
