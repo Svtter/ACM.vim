@@ -1,6 +1,8 @@
 ACM.vim
 ===
 
+You can see English version in Wiki.
+
 task
 ---
 

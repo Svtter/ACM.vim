@@ -1,4 +1,12 @@
-" 判断操作系统
+" ACM / icpc plugin for ACMer
+" Last Change: 
+" Maintainer: svtter <svtter@qq.com>
+" License: 
+"
+"
+"
+"
+" judge OS
 let s:iswindows = 0
 let s:islinux = 0
 if(has("win32") || has("win64") || has("win95") || has("win16"))
@@ -7,7 +15,7 @@ else
     let s:islinux = 1
 endif
 
-" 判断是终端还是 Gvim 
+" Gvim or Terminal
 if has("gui_running")
     let s:isGUI = 1
 else
@@ -16,15 +24,16 @@ endif
 
 " ACM:
 augroup ACM
-    " 清空之前的配置
+    " enable to source
     autocmd!
     autocmd BufNewFile ACM_*.cpp 0r ~/.vim/template/cpp/ACM_config.cpp   " ACM C++模板
     autocmd BufNewFile ACM_*.c 0r ~/.vim/template/cpp/ACM_config.c       " ACM C模板
     autocmd BufNewFile ex*.cpp 0r ~/.vim/template/cpp/exercise.cpp       " ACM 简单模板
 
-    " 保存自动整理代码
+    " auto indent
     autocmd BufWritePre *.cpp :call Tidy()
     autocmd BufWritePre *.c :call Tidy()
+
 augroup END
 
 
@@ -269,7 +278,7 @@ endfunction
 "进行版权声明的设置
 "添加或更新头
 noremap <F4> :call TitleDet()<cr>'s
-function AddTitle()
+function! AddTitle()
     call append(0,"/*=============================================================================")
     call append(1,"#")
     call append(2,"# Author: svtter - svtter@qq.com")
@@ -287,7 +296,7 @@ function AddTitle()
 endf
 
 "更新最近修改时间和文件名
-function UpdateTitle()
+function! UpdateTitle()
     normal m'
     execute '/# *Last modified:/s@:.*$@\=strftime(":\t%Y-%m-%d %H:%M")@'
     normal ''
@@ -301,7 +310,7 @@ endfunction
 "判断前10行代码里面，是否有Last modified这个单词，
 "如果没有的话，代表没有添加过作者信息，需要新添加；
 "如果有的话，那么只需要更新即可
-function TitleDet()
+function! TitleDet()
     let n=1
     "默认为添加
     while n < 10
