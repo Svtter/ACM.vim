@@ -5,8 +5,7 @@
 "
 "
 "
-"
-" judge OS
+" Judge OS
 let s:iswindows = 0
 let s:islinux = 0
 if(has("win32") || has("win64") || has("win95") || has("win16"))
@@ -22,7 +21,29 @@ else
     let s:isGUI = 0
 endif
 
+
+
+
+" add to command, make it available to change
+let s:functionlist = ['Run', 'Debug', 'Tidy', 'TitleDet', 'UpdateTitle', 'Link', 'Compile']
+
+" if !exists(":Run")
+  " command -nargs=?  Run call s:Run(<f-args>)
+" endif
+
+" use to control the templete file and author name
+let g:acm_templete_file = ""
+let g:author_name = ""
+
+" Control auto-indent
+if !exists("g:enable_save_to_indent") 
+    let g:enable_save_to_indent = 1
+endif
+
+
+
 " ACM:
+" Control the ACM template
 augroup ACM
     " enable to source
     autocmd!
@@ -31,9 +52,10 @@ augroup ACM
     autocmd BufNewFile ex*.cpp 0r ~/.vim/template/cpp/exercise.cpp       " ACM 简单模板
 
     " auto indent
-    autocmd BufWritePre *.cpp :call Tidy()
-    autocmd BufWritePre *.c :call Tidy()
-
+    if g:enable_save_to_indent
+        autocmd BufWritePre *.cpp :call Tidy()
+        autocmd BufWritePre *.c :call Tidy()
+    endif
 augroup END
 
 
@@ -66,6 +88,7 @@ let s:Obj_Extension = '.o'
 let s:Exe_Extension = '.exe'
 let s:Sou_Error = 0
 
+" able to change
 " 编译选项 C语言
 let s:windows_CFlags = 'gcc\ -fexec-charset=gbk\ -Wall\ -g\ -lm\ -O0\ -c\ %\ -o\ %<.o'
 let s:linux_CFlags = 'gcc\ -Wall\ -g\ -lm\ -O0\ -c\ %\ -o\ %<.o'
@@ -74,7 +97,7 @@ let s:linux_CFlags = 'gcc\ -Wall\ -g\ -lm\ -O0\ -c\ %\ -o\ %<.o'
 let s:windows_CPPFlags = 'g++\ -fexec-charset=gbk\ -Wall\ -DDEBUG\ -g\ -O0\ -c\ %\ -o\ %<.o'
 let s:linux_CPPFlags = 'g++\ -Wall\ -DDEBUG\ -g\ -O0\ -c\ %\ -o\ %<.o'
 
-func! Compile()
+function! Compile()
     exe ":ccl"
     exe ":update"
     let s:Sou_Error = 0
@@ -134,7 +157,7 @@ func! Compile()
     exe ":setlocal makeprg=make"
 endfunc
 
-func! Link()
+function! Link()
     call Compile()
     if s:Sou_Error || s:LastShellReturn_C != 0
         return
@@ -192,7 +215,7 @@ func! Link()
     endif
 endfunc
 
-func! Run()
+function! Run()
     " confirm directory
     let s:pwd = expand("%:p:h")
     let s:ShowWarning = 0
@@ -227,7 +250,7 @@ func! Run()
     endif
 endfunc
 
-func! Debug()
+function! Debug()
     " confirm directory
     let s:pwd = expand("%:p:h")
     let s:ShowWarning = 0
