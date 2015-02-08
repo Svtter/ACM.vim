@@ -1,7 +1,8 @@
 ACM.vim
 ===
 
-You can see English version in Wiki.
+You can see English version in [Wiki](./wiki)
+你可以在[wiki](./wiki)中查看更多的内容.
 
 task
 ---
@@ -14,6 +15,8 @@ task
 - [ ] 快速调出input, output，利用<leader>+快捷键
 - [ ] 利用w3m快速查询
 - [ ] 添加编译选项
+
+想要更多的功能？提issue吧。
 
 
 操作系统
