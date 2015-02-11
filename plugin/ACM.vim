@@ -31,6 +31,11 @@ let s:functionlist = ['Run', 'Debug', 'Tidy', 'TitleDet', 'UpdateTitle', 'Link',
   " command -nargs=?  Run call s:Run(<f-args>)
 " endif
 
+
+" -----------------------------------------------------------------------------
+" var setting
+" -----------------------------------------------------------------------------
+"
 " use to control the templete file and author name
 let g:acm_templete_file = ""
 let g:author_name = ""
@@ -38,6 +43,11 @@ let g:author_name = ""
 " Control auto-indent
 if !exists("g:enable_save_to_indent") 
     let g:enable_save_to_indent = 1
+endif
+
+" terminal
+if !exists("g:ACM_terminal")
+    let g:ACM_terminal = "gnome-terminal"
 endif
 
 
@@ -239,7 +249,8 @@ function! Run()
                 exe ":!%<.exe"
             else
                 if s:isGUI
-                    exe ":!gnome-terminal -x bash -c ' cd " . s:pwd . ";time ./%<; echo; echo 请按 Enter 键继续; read'"
+                    " exe ":!gnome-terminal -x bash -c ' cd " . s:pwd . ";time ./%<; echo; echo 请按 Enter 键继续; read'"
+                    exe ":!". g:ACM_terminal . " -x bash -c ' cd " . s:pwd . ";time ./%<; echo; echo 请按 Enter 键继续; read'"
                 else
                     exe ":!clear; ./%<"
                 endif
