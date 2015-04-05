@@ -57,9 +57,7 @@ endif
 augroup ACM
     " enable to source
     autocmd!
-    autocmd BufNewFile ACM_*.cpp 0r ~/.vim/template/cpp/ACM_config.cpp   " ACM C++模板
-    autocmd BufNewFile ACM_*.c 0r ~/.vim/template/cpp/ACM_config.c       " ACM C模板
-    autocmd BufNewFile ex*.cpp 0r ~/.vim/template/cpp/exercise.cpp       " ACM 简单模板
+    autocmd BufNewFile *.cpp 0r ~/github/ACM_templete/init.cpp
 
     " auto indent
     if g:enable_save_to_indent
