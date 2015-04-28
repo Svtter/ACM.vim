@@ -47,7 +47,7 @@ endif
 
 " terminal
 if !exists("g:ACM_terminal")
-    let g:ACM_terminal = "gnome-terminal"
+    let g:ACM_terminal = "xfce4-terminal"
 endif
 
 
@@ -283,7 +283,7 @@ function! Debug()
                 exe ":!gdb %<.exe"
             else
                 if s:isGUI
-                    exe ":!gnome-terminal -x bash -c ' cd " . s:pwd . ";gdb ./%<; echo; echo 请按 Enter 键继续; read'"
+                    exe ":!". g:ACM_terminal . " -x bash -c ' cd " . s:pwd . ";gdb ./%<; echo; echo 请按 Enter 键继续; read'"
                 else
                     exe ":!clear; ./%<"
                 endif
