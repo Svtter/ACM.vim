@@ -98,12 +98,12 @@ let s:Sou_Error = 0
 
 " able to change
 " 编译选项 C语言
-let s:windows_CFlags = 'gcc\ -fexec-charset=gbk\ -Wall\ -g\ -lm\ -O0\ -c\ %\ -o\ %<.o'
-let s:linux_CFlags = 'gcc\ -Wall\ -g\ -lm\ -O0\ -c\ %\ -o\ %<.o'
+let s:windows_CFlags = 'gcc\ -fexec-charset=gbk\ -Wall\ -g\ -lm\ -O2\ -c\ %\ -o\ %<.o'
+let s:linux_CFlags = 'gcc\ -Wall\ -g\ -lm\ -O2\ -c\ %\ -o\ %<.o'
 
 " 编译选项 C++
-let s:windows_CPPFlags = 'g++\ -fexec-charset=gbk\ -Wall\ -DDEBUG\ -g\ -O0\ -c\ %\ -o\ %<.o'
-let s:linux_CPPFlags = 'g++\ -Wall\ -DDEBUG\ -g\ -O0\ -c\ %\ -o\ %<.o'
+let s:windows_CPPFlags = 'g++\ -fexec-charset=gbk\ -Wall\ -DDEBUG\ -g\ -O2\ -c\ %\ -o\ %<.o'
+let s:linux_CPPFlags = 'g++\ -Wall\ -DDEBUG\ -g\ -O2\ -c\ %\ -o\ %<.o'
 
 function! Compile()
     exe ":ccl"
