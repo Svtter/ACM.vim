@@ -47,7 +47,7 @@ endif
 
 " terminal
 if !exists("g:ACM_terminal")
-    let g:ACM_terminal = "xfce4-terminal"
+    let g:ACM_terminal = "gnome-terminal"
 endif
 
 
@@ -88,6 +88,10 @@ inoremap <c-F10> <ESC>:call Link()<CR>
 " F8 编译调试（仅限于单文件)
 noremap <F8> :call Debug()<CR>
 inoremap <F8> <ESC>:call Debug()<CR>
+
+" 仅运行，运行过后删除
+noremap <F6> :call TempRun()<CR>
+inoremap <F6> <ESC>:call TempRun()<CR>
 
 let s:LastShellReturn_C = 0
 let s:LastShellReturn_L = 0
@@ -302,6 +306,10 @@ function! Tidy()
     execute ":normal zz"
 endfunction
 
+function! TempRun()
+    call Run()
+    exe "!rm %<.o %<"
+endfunction
 
 " -----------------------------------------------------------------------------
 " < 作者名 插入设置>
