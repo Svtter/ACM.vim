@@ -57,7 +57,9 @@ endif
 augroup ACM
     " enable to source
     autocmd!
-    autocmd BufNewFile *.cpp 0r ~/github/ACM_templete/init.cpp
+    " read template
+    autocmd FileType c,cpp 0r ~/github/ACM_templete/init.cpp
+    autocmd FileType c,cpp setlocal textwidth=80 formatoptions+=t  
 
     " auto indent
     if g:enable_save_to_indent
