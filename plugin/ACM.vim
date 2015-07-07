@@ -74,26 +74,32 @@ augroup END
 "  < 单文件编译、连接、运行配置 >
 " -----------------------------------------------------------------------------
 " 以下只做了 C、C++ 的单文件配置，其它语言可以参考以下配置增加
+"
 
-" F9 一键保存、编译、连接存并运行
-noremap <F9> :call Run()<CR>
-inoremap <F9> <ESC>:call Run()<CR>
+" Map:
+" {
+    " F9 一键保存、编译、连接存并运行
+    noremap <F9> :call Run()<CR>
+    inoremap <F9> <ESC>:call Run()<CR>
 
-" Ctrl + F9 一键保存并编译
-noremap <c-F9> :call Compile()<CR>
-inoremap <c-F9> <ESC>:call Compile()<CR>
+    " Ctrl + F9 一键保存并编译
+    noremap <c-F9> :call Compile()<CR>
+    inoremap <c-F9> <ESC>:call Compile()<CR>
 
-" Ctrl + F10 一键保存并连接
-noremap <c-F10> :call Link()<CR>
-inoremap <c-F10> <ESC>:call Link()<CR>
+    " Ctrl + F10 一键保存并连接
+    noremap <c-F10> :call Link()<CR>
+    inoremap <c-F10> <ESC>:call Link()<CR>
 
-" F8 编译调试（仅限于单文件)
-noremap <F8> :call Debug()<CR>
-inoremap <F8> <ESC>:call Debug()<CR>
+    " F8 编译调试（仅限于单文件)
+    noremap <F8> :call Debug()<CR>
+    inoremap <F8> <ESC>:call Debug()<CR>
 
-" 仅运行，运行过后删除
-noremap <F6> :call TempRun()<CR>
-inoremap <F6> <ESC>:call TempRun()<CR>
+    " 仅运行，运行过后删除
+    noremap <F6> :call TempRun()<CR>
+    inoremap <F6> <ESC>:call TempRun()<CR>
+" }
+
+
 
 let s:LastShellReturn_C = 0
 let s:LastShellReturn_L = 0
@@ -291,7 +297,7 @@ function! Debug()
                 if s:isGUI
                     exe ":!". g:ACM_terminal . " -x bash -c ' cd " . s:pwd . ";gdb ./%<; echo; echo 请按 Enter 键继续; read'"
                 else
-                    exe ":!clear; ./%<"
+                    exe ":!clear; gdb ./%<"
                 endif
             endif
             redraw!
