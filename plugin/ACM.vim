@@ -33,22 +33,33 @@ let s:functionlist = ['Run', 'Debug', 'Tidy', 'TitleDet', 'UpdateTitle', 'Link',
 
 
 " -----------------------------------------------------------------------------
-" var setting
+" Var_setting:
 " -----------------------------------------------------------------------------
 "
-" use to control the templete file and author name
-let g:acm_templete_file = ""
-let g:author_name = ""
+" {
+    " use to control the templete file and author name
+    let g:acm_templete_file = ""
+    let g:author_name = ""
 
-" Control auto-indent
-if !exists("g:enable_save_to_indent") 
-    let g:enable_save_to_indent = 1
-endif
+    " Control auto-indent
+    if !exists("g:enable_save_to_indent") 
+        let g:enable_save_to_indent = 1
+    endif
 
-" terminal
-if !exists("g:ACM_terminal")
-    let g:ACM_terminal = "gnome-terminal"
-endif
+    " terminal
+    if !exists("g:ACM_terminal")
+        let g:ACM_terminal = "gnome-terminal"
+    endif
+
+    if !exists("g:debugtool")
+        let g:debugtool= "gdb"
+    endif
+
+    if executable('cgdb')
+        let g:debugtool= "cgdb"
+    endif
+
+" }
 
 
 
@@ -58,7 +69,7 @@ augroup ACM
     " enable to source
     autocmd!
     " read template
-    autocmd FileType c,cpp 0r ~/github/ACM_templete/init.cpp
+    " autocmd FileType c,cpp 0r ~/github/ACM_templete/init.cpp "not finish yet
     autocmd FileType c,cpp setlocal textwidth=80 formatoptions+=t  
 
     " auto indent
@@ -295,9 +306,9 @@ function! Debug()
                 exe ":!gdb %<.exe"
             else
                 if s:isGUI
-                    exe ":!". g:ACM_terminal . " -x bash -c ' cd " . s:pwd . ";gdb ./%<; echo; echo 请按 Enter 键继续; read'"
+                    exe ":!". g:ACM_terminal . " -x bash -c ' cd " . s:pwd . ";" . g:debugtool . " ./%<; echo; echo 请按 Enter 键继续; read'"
                 else
-                    exe ":!clear; gdb ./%<"
+                    exe ":!clear; " . g:debugtool . " ./%<"
                 endif
             endif
             redraw!
